@@ -6,7 +6,7 @@ import Playlist from './playlist';
 import { sanityClient, urlFor } from '../../sanity';
 
 interface Props {
-  course: Course[];
+  course: Course;
 }
 
 const PostPage = ({ course }: Props) => {
@@ -22,7 +22,7 @@ const PostPage = ({ course }: Props) => {
          <div className='border-b border-[#0e0e0e]'>
            <span className='text-lg text-white font-bold'>COURSE</span>
            <div className=' my-5'>
-           <Image src={urlFor(course[0].mainImage).url()} alt="Thumbnail" width={700} height={400} className="rounded-xl" />
+           <Image src={urlFor(course.mainImage).url()} alt="Thumbnail" width={700} height={400} className="rounded-xl" />
 
              <div className='my-3'>
                <div className="flex space-x-3">
@@ -32,9 +32,9 @@ const PostPage = ({ course }: Props) => {
                  <button className='hover:border-b-2 border-gray-600 text-white md:px-2 md:font-medium '>Announcements</button>
                </div>
                <div>
-                 <h2 className='my-3 text-2xl font-medium'>{course[0].title}</h2>
+                 <h2 className='my-3 text-2xl font-medium'>{course.title}</h2>
                   <div className='border-t border-[#0e0e0e] py-2'>
-                    {course[0].description}
+                    {course.description}
                   </div>
                </div>
              </div>
