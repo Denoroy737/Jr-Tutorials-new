@@ -10,7 +10,7 @@ interface Props {
 }
 
 const PostPage = ({ course }: Props) => {
-  console.log(course)
+  // console.log(course)
   const router = useRouter()
 
   if (router.isFallback) {

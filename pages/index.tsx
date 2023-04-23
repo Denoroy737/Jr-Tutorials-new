@@ -2,12 +2,9 @@ import Banner from './Banner';
 import Card from './Card';
 import Ebok_card from './ebok_card';
 import Headline from './headline';
-import Nav from './Navbar';
-import Sidebar from './Sidebar';
 import React from 'react';
-import { sanityClient, urlFor } from "../sanity";
+import { sanityClient } from "../sanity";
 import { Course } from '../typings';
-import groq from 'groq';
 
 interface Props {
   courses: Course[];
@@ -33,8 +30,6 @@ export const getServerSideProps = async () => {
 
   const query = `*[_type == "Courses"]`;
   const courses = await sanityClient.fetch<Course[]>(query);
-  // console.log(courses)
-  // This is where we return the props
   return {
     props: {
       courses,

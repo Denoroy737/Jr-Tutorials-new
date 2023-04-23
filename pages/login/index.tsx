@@ -1,14 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Input, Row, Checkbox, Button, Text } from "@nextui-org/react";
 import firebase from "firebase/app";
 import { auth } from "../../config/firebase";
 import { Message, Unlock } from "react-iconly";
 import { signInWithEmailAndPassword } from "../../config/firebase";
+import { useRouter } from 'next/router';
 
 export default function Login() {
   const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        // User is logged in, navigate to the desired page
+        router.push('/');
+      }
+    });
+    // Clean up the subscription when the component unmounts
+    return unsubscribe;
+  }, [router]);
 
   const handler = () => setVisible(true);
   const closeHandler = () => {
@@ -59,7 +72,7 @@ export default function Login() {
             color="primary"
             size="lg"
             placeholder="Email"
-            contentLeft={<Message set="broken"/>}
+            contentLeft={<Message set="broken" />}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />

@@ -9,8 +9,6 @@ interface Props {
 }
 
 const Card = ({ courses }: Props) => {
-  // console.log("data: ", courses);
-
   return (
     <div className='flex flex-wrap md:justify-between justify-center'>
       {courses.map((course) => {

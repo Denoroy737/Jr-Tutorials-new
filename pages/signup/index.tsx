@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Input, Row, Checkbox, Button, Text } from "@nextui-org/react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, firestore } from "../../config/firebase";
@@ -6,6 +6,7 @@ import { updateDoc, doc, setDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
 import { Message, Unlock } from "react-iconly";
 import type { UserCredential } from "firebase/auth";
+import { useRouter } from 'next/router';
 
 export default function Signup() {
   const [visible, setVisible] = useState<boolean>(false);
@@ -19,6 +20,19 @@ export default function Signup() {
     setVisible(false);
     console.log("closed");
   };
+  const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        // User is logged in, navigate to the desired page
+        router.push('/');
+      }
+    });
+      // Clean up the subscription when the component unmounts
+      return unsubscribe;
+    }, [router]);
+
 
   const handleSignUp = async () => {
     try {

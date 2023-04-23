@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { auth, collection, doc, firestore, getDoc } from '../../config/firebase';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Message } from 'react-iconly';
 
 const Page = () => {
   const router = useRouter();
@@ -49,7 +50,7 @@ const Page = () => {
         });
       });
   }
-  
+
   // Check if user is logged in
   if (!auth.currentUser) {
     return <div>Please login first</div>
