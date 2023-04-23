@@ -6,11 +6,11 @@ import Playlist from './playlist';
 import { sanityClient, urlFor } from '../../sanity';
 
 interface Props {
-  courses: Course[];
+  course: Course[];
 }
 
-const PostPage = ({ courses }: Props) => {
-  console.log(courses)
+const PostPage = ({ course }: Props) => {
+  console.log(course)
   const router = useRouter()
 
   if (router.isFallback) {
@@ -22,7 +22,8 @@ const PostPage = ({ courses }: Props) => {
          <div className='border-b border-[#0e0e0e]'>
            <span className='text-lg text-white font-bold'>COURSE</span>
            <div className=' my-5'>
-             <Image src={urlFor(courses.mainImage).url()} alt="Thumbnail" width={700} height={400} className="rounded-xl" />
+           <Image src={urlFor(course[0].mainImage).url()} alt="Thumbnail" width={700} height={400} className="rounded-xl" />
+
              <div className='my-3'>
                <div className="flex space-x-3">
                  <button className='border-b-2 border-gray-600 text-white md:px-2 md:font-medium '>Overview</button>
@@ -31,9 +32,9 @@ const PostPage = ({ courses }: Props) => {
                  <button className='hover:border-b-2 border-gray-600 text-white md:px-2 md:font-medium '>Announcements</button>
                </div>
                <div>
-                 <h2 className='my-3 text-2xl font-medium'>{courses.title}</h2>
+                 <h2 className='my-3 text-2xl font-medium'>{course[0].title}</h2>
                   <div className='border-t border-[#0e0e0e] py-2'>
-                    {courses.description}
+                    {course[0].description}
                   </div>
                </div>
              </div>
@@ -43,6 +44,7 @@ const PostPage = ({ courses }: Props) => {
        </div>
   )
 }
+
 
 export default PostPage
 
@@ -55,14 +57,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     mainImage,
     description
   }`
-
-  const courses = await sanityClient.fetch(query, { slug })
-
+  
+  const course = await sanityClient.fetch(query, { slug })
+  
   return {
-    props: { courses },
+    props: { course },
     revalidate: 1
   }
-}
+}  
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const query = `*[_type == "Courses"]{slug}`

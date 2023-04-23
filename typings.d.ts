@@ -8,8 +8,8 @@ interface SanityDocument {
 
 // Path: src/types/course.ts
 export interface Course extends SanityDocument {
-    
-    _type: "Courses";   
+
+    _type: "Courses";
     title: string;
     slug: {
         _type: "slug";
@@ -18,6 +18,7 @@ export interface Course extends SanityDocument {
     body: string;
     class: number;
     price: number;
+    description: string;
     videos: {
         _key: string;
         _type: "video";
@@ -58,8 +59,7 @@ export interface Course extends SanityDocument {
             version: number;
             width: number;
         };
-    }
-
+    };
     mainImage: {
         _type: "image";
         asset: {
@@ -67,12 +67,10 @@ export interface Course extends SanityDocument {
             _type: "reference";
         };
     };
-
     author: {
         _ref: string;
         _type: "reference";
     };
-    
     categories: {
         _key: string;
         _ref: string;
@@ -80,4 +78,4 @@ export interface Course extends SanityDocument {
     }[];
 
 
-}
+};
