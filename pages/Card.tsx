@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { sanityClient, urlFor } from "../sanity";
+import { urlFor } from "../sanity";
 import { Course } from '../typings';
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 const Card = ({ courses }: Props) => {
   return (
     <div className='flex flex-wrap md:justify-between justify-center'>
-      {courses.map((course) => {
+      {Array.isArray(courses) && courses.length > 0 ? courses.map((course) => {
         const { _id, title, class: classNumber, mainImage, slug, price } = course;
         return slug && (
           <Link href={`/Course/${encodeURIComponent(slug.current)}`} key={_id}>
@@ -33,7 +33,7 @@ const Card = ({ courses }: Props) => {
             </div>
           </Link>
         );
-      })}
+      }) : <p>No courses available</p>}
     </div>
   );
 };

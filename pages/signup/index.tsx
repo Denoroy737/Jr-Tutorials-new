@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Input, Row, Checkbox, Button, Text } from "@nextui-org/react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { Modal, Input, Row, Checkbox, Button, Text, Col } from "@nextui-org/react";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup } from "firebase/auth";
 import { auth, firestore } from "../../config/firebase";
-import { updateDoc, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
-import { Message, Unlock } from "react-iconly";
+import { Message, Unlock, Call } from "react-iconly";
 import type { UserCredential } from "firebase/auth";
 import { useRouter } from 'next/router';
+import Link from "next/link";
+
+
 
 export default function Signup() {
   const [visible, setVisible] = useState<boolean>(false);
@@ -21,17 +24,22 @@ export default function Signup() {
     console.log("closed");
   };
   const router = useRouter();
-
+  
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        // User is logged in, navigate to the desired page
-        router.push('/');
+        if (user.emailVerified) {
+          // User is logged in and email is verified, navigate to the desired page
+          router.push('/');
+        } else {
+          // User is logged in but email is not verified, show a message to the user.
+          console.log("Please verify your email address.");
+        }
       }
     });
-      // Clean up the subscription when the component unmounts
-      return unsubscribe;
-    }, [router]);
+    // Clean up the subscription when the component unmounts
+    return unsubscribe;
+  }, [router]);
 
 
   const handleSignUp = async () => {
@@ -44,18 +52,19 @@ export default function Signup() {
       // Signed up
       const user = userCredential.user;
       console.log("User signed up:", user);
-  
-      const currentUser = auth.currentUser;
-      if (currentUser) {
-        await updateProfile(currentUser, {
-          displayName: name,
-          photoURL: photoUrl,
-        });
-        console.log("Profile updated successfully!");
-      } else {
-        console.log("Error: User not authenticated.");
-      }
-  
+
+      // Send email verification
+      await sendEmailVerification(user);
+
+      // Show message to user to check their email and verify their email address.
+      console.log("A verification email has been sent to your email address.");
+
+      await updateProfile(user, {
+        displayName: name,
+        photoURL: photoUrl,
+      });
+      console.log("Profile updated successfully!");
+
       await setDoc(doc(firestore, "users", user.uid), {
         name,
         photoUrl,
@@ -63,7 +72,7 @@ export default function Signup() {
         createdAt: new Date(),
       }, { merge: true });
       console.log("User document updated successfully!");
-  
+
       setVisible(false);
     } catch (error: any) {
       const errorCode = error.code;
@@ -71,30 +80,48 @@ export default function Signup() {
       console.log("Error signing up:", errorCode, errorMessage);
     }
   };
-  
+
+  const handleSignInWithGoogle = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      console.log("User signed in with Google.");
+      setVisible(false);
+    } catch (error: any) {
+      console.log("Error signing in with Google:", error.message);
+    }
+  };
+
+  const handleSignInWithPhone = async () => {
+    try {
+      // Implement your phone authentication flow here
+      console.log("User signed in with phone.");
+      setVisible(false);
+    } catch (error: any) {
+      console.log("Error signing in with phone:", error.message);
+    }
+  };
 
   return (
     <div>
       <Button auto color="warning" shadow onPress={handler}>
         Join now
-      </Button>
+      </Button> 
       <Modal
         closeButton
         blur
         aria-labelledby="modal-title"
         open={visible}
         onClose={closeHandler}
+        
       >
-        <Modal.Header>
+        <Modal.Header >
           <Text id="modal-title" size={18}>
             Welcome to
-            <Text b size={18}>
-              NextUI
-            </Text>
+            <Text b size={18}> JR Tutorials</Text>
           </Text>
         </Modal.Header>
         <Modal.Body>
-          <Text b>Sign up</Text>
           <Input
             clearable
             bordered
@@ -117,36 +144,22 @@ export default function Signup() {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-          <Input
-            bordered
-            fullWidth
-            color="primary"
-            size="lg"
-            contentLeft={<Message set="broken" />}
-            placeholder="Name"
-            clearable
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-          />
-          <Input
-            bordered
-            fullWidth
-            color="primary"
-            size="lg"
-            contentLeft={<Message set="broken" />}
-            placeholder="Profile Photo URL"
-            clearable
-            onChange={(e) => setPhotoUrl(e.target.value)}
-            value={photoUrl}
-          />
+          <Text size={14} className='text-center' >or</Text>
+          <Row justify="space-around">
+            <button className='py-2 mx-2 font-medium w-full text-center rounded-md bg-[#cdcdcd]' onClick={() => handleSignInWithGoogle()}>
+              Google
+            </button>
+            <button className='py-2 mx-2 font-medium w-full text-center rounded-md bg-[#cdcdcd]' onClick={() => handleSignInWithPhone()}>
+              Phone
+            </button>
+          </Row>
           <Row justify="space-between">
-            <Checkbox name="checkbox" />
-            <Text small>
-              I agree to the{" "}
-              <Text small color="#0055b3">
-                terms and conditions
-              </Text>
-            </Text>
+            <Checkbox>
+              <Text size={14}>Remember me</Text>
+            </Checkbox>
+            <Link href='/login'>
+              <Text size={14}>Login?</Text>
+            </Link>
           </Row>
         </Modal.Body>
         <Modal.Footer>
