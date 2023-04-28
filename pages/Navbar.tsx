@@ -21,17 +21,8 @@ const Navbar = () => {
   return (
     <div className='flex justify-between items-center'>
       <div>
-        {currentUser ? (
-          <>
             <h3 className="text-gray-200 md:text-lg ">Hello,</h3>
-            <h1 className="md:text-3xl text-2xl font-bold">{currentUser.displayName} &#128075;</h1>
-          </>
-        ) : (
-          <>
-            <h3 className="text-gray-200 md:text-lg ">Hello,</h3>
-            <h1 className="md:text-3xl text-2xl font-bold">Ron Smith &#128075;</h1>
-          </>
-        )}
+            <h1 className="md:text-3xl text-2xl font-bold">{currentUser? currentUser.displayName : "Ron Smith"} &#128075;</h1>
       </div>
       <div className='flex space-x-2 items-center'>
           <div className="dropdown dropdown-end items-center">

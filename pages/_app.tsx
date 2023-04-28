@@ -2,54 +2,56 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../config/firebase";
-import { setCookie } from 'nookies'; // import the setCookie function from nookies
 import "../styles/globals.css";
 import Nav from "./Navbar";
 import Sidebar from "./Sidebar";
 import type { AppProps } from "next/app";
+import { Loading } from "@nextui-org/react";
+
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setLoading(false);
       if (user) {
         setUser(user);
-        user.getIdToken().then((token) => {
-          setCookie(null, 'token', token, { // set the Firebase authentication token in a cookie
-            maxAge: 3600, // set the cookie expiration time to 1 hour
-            path: '/', // set the cookie path to '/'
-          });
-        });
       } else {
         setUser(null);
-        setCookie(null, 'token', '', { // remove the Firebase authentication token from the cookie
-          maxAge: -1, // set the cookie expiration time to negative to remove it immediately
-          path: '/',
-        });
       }
     }, (error) => {
+      setLoading(false);
       console.log(error);
     });
 
     return unsubscribe;
   }, []);
 
+  if (loading) {
+    // show the loader while loading
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Loading />
+      </div>
+    );
+  }
 
-return user ? (
-  <div className="flex">
-    <div className="hidden md:block">
-      <Sidebar />
-    </div>
-    <div className="px-10 py-5 w-[100vw] h-screen overflow-y-auto overflow-x-hidden">
-      <Nav />
-      <div className="my-5">
-        <Component {...pageProps} />
+  return user ? (
+    <div className="flex">
+      <div className="hidden md:block">
+        <Sidebar />
+      </div>
+      <div className="px-10 py-5 w-[100vw] h-screen overflow-y-auto overflow-x-hidden">
+        <Nav />
+        <div className="my-5">
+          <Component {...pageProps} />
+        </div>
       </div>
     </div>
-  </div>
-) : (
-  <Component {...pageProps} />
-);
+  ) : (
+    <Component {...pageProps} />
+  );
 }
