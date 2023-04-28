@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from "next/image";
 import { useRouter } from 'next/router';
-import { auth, collection, doc, firestore, getDoc } from '../../config/firebase';
+import { auth } from '../../config/firebase';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Message } from 'react-iconly';
