@@ -149,6 +149,7 @@ export default function Home({ courses }: Props): JSX.Element {
 export const getServerSideProps = async () => {
   const query = `*[_type == "Courses"]`;
   const courses = await sanityClient.fetch<Course[]>(query);
+  console.log(courses)
   return {
     props: {
       courses,

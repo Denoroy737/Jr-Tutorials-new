@@ -40,7 +40,7 @@ const PostPage = ({ course }: Props) => {
              </div>
            </div>
          </div>
-         <Playlist />
+         <Playlist course={course} />
        </div>
   )
 }
@@ -51,12 +51,7 @@ export default PostPage
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.slug as string
 
-  const query = `*[_type == "Courses" && slug.current == $slug][0]{
-    _id,
-    title,
-    mainImage,
-    description
-  }`
+  const query = `*[_type == "Courses" && slug.current == $slug][0]`
   
   const course = await sanityClient.fetch(query, { slug })
   
