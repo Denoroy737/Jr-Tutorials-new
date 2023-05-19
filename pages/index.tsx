@@ -85,10 +85,15 @@ export default function Home({ courses }: Props): JSX.Element {
 
   useEffect(() => {
     const delay = setTimeout(() => {
-      if (!auth.currentUser?.displayName) {
-        setShowModal(true);
-      }
+      const unsubscribe = auth.onAuthStateChanged(user => {
+        if (user) {
+          if (!auth.currentUser?.displayName) {
+            setShowModal(true);
+          }
+        }
+      });
       setIsLoading(false);
+      return unsubscribe;
     }, 2000);
     return () => clearTimeout(delay);
   }, []);
