@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Button, Modal } from '@nextui-org/react';
+import { Button, Modal, Text } from '@nextui-org/react';
 
 const Notifications = () => {
   const [visible, setVisible] = React.useState(false);
@@ -37,9 +37,10 @@ const Notifications = () => {
         aria-labelledby="modal-title"
         open={visible}
         onClose={closeHandler}
+        css={{ background: '#202020', }}
       >
         <Modal.Header>
-          <h2 id="modal-title">Hello Bhacho To kase ho aap!</h2>
+           <Text b color="white" size={18}> Hello Bhacho To kase ho aap!</Text>
         </Modal.Header>
       </Modal>
     </div>

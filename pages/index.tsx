@@ -1,16 +1,16 @@
+import { Button, Divider, Input, Modal, Row, Text } from "@nextui-org/react";
+import { updateProfile } from 'firebase/auth';
+import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { useEffect, useState } from 'react';
+import { User } from "react-iconly";
+import { app, auth, firestore } from '../config/firebase';
+import { sanityClient } from '../sanity';
+import { Course } from '../typings';
 import Banner from './Banner';
 import Card from './Card';
 import EbookCard from './EbookCard';
 import Headline from './Headline';
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Course } from '../typings';
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { app, auth, firestore } from '../config/firebase';
-import { Image2, User } from "react-iconly";
-import { Modal, Input, Row, Button, Text, Divider } from "@nextui-org/react";
-import { collection, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { sanityClient } from '../sanity';
-import { updateProfile } from 'firebase/auth';
 
 interface Props {
   courses: Course[];

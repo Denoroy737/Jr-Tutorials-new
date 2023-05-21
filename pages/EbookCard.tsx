@@ -1,7 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 import { Download } from 'react-iconly';
+
 const Ebok_card = () => {
+
+  const [visible, setVisible] = React.useState(false);
+  const handler = () => setVisible(true);
+
+  function closeHandler() {
+    setVisible(false);
+    console.log("closed");
+  }
+  
   return (
     <div className='flex flex-wrap md:justify-between items-center justify-center'>
       <Link href="/Courses/Science">
@@ -23,7 +34,7 @@ const Ebok_card = () => {
       </Link>
       <Link href="/Courses/Science">
         <div className='my-3 md:w-64 w-40 mr-5 hover:bg-[#2a2a2a] bg-[#212121] rounded-xl'>
-          <Image src="https://bit.ly/3hO2KCD" alt="Thumbnail" width={100} height={100} className="rounded-t-xl w-full md:h-64 h-40 object-cover object-top" />
+          <Image src="https://bit.ly/3hO2KCD" alt="Thumbnail" width={100} height={100} className="rounded-t-xl w-full md:h-52 h-40 object-cover object-top" />
           <div className="md:p-5 p-3 rounded-b-xl">
             <h2 className='md:text-xl text-lg font-bold'>9th Science and Technolo...</h2>
             <div className='md:flex hidden justify-between items-center space-x-5 spaec-x- mt-2'>
@@ -40,7 +51,7 @@ const Ebok_card = () => {
       </Link>
       <Link href="/Courses/Science">
         <div className='my-3 md:w-64 w-40 mr-5 hover:bg-[#2a2a2a] bg-[#212121] rounded-xl'>
-          <Image src="https://bit.ly/3hO2KCD" alt="Thumbnail" width={100} height={100} className="rounded-t-xl w-full md:h-64 h-40 object-cover object-top" />
+          <Image src="https://bit.ly/3hO2KCD" alt="Thumbnail" width={100} height={100} className="rounded-t-xl w-full md:h-52 h-40 object-cover object-top" />
           <div className="md:p-5 p-3 rounded-b-xl">
             <h2 className='md:text-xl text-lg font-bold'>9th Science and Technolo...</h2>
             <div className='md:flex hidden justify-between items-center space-x-5 spaec-x- mt-2'>
@@ -57,7 +68,7 @@ const Ebok_card = () => {
       </Link>
       <Link href="/Courses/Science">
         <div className='my-3 md:w-64 w-40 mr-5 hover:bg-[#2a2a2a] bg-[#212121] rounded-xl'>
-          <Image src="https://bit.ly/3hO2KCD" alt="Thumbnail" width={100} height={100} className="rounded-t-xl w-full md:h-64 h-40 object-cover object-top" />
+          <Image src="https://bit.ly/3hO2KCD" alt="Thumbnail" width={100} height={100} className="rounded-t-xl w-full md:h-52 h-40 object-cover object-top" />
           <div className="md:p-5 p-3 rounded-b-xl">
             <h2 className='md:text-xl text-lg font-bold'>9th Science and Technolo...</h2>
             <div className='md:flex hidden justify-between items-center space-x-5 spaec-x- mt-2'>
@@ -74,7 +85,7 @@ const Ebok_card = () => {
       </Link>
       <Link href="/Courses/Science">
         <div className='my-3 md:w-64 w-40 mr-5 hover:bg-[#2a2a2a] bg-[#212121] rounded-xl'>
-          <Image src="https://bit.ly/3hO2KCD" alt="Thumbnail" width={100} height={100} className="rounded-t-xl w-full md:h-64 h-40 object-cover object-top" />
+          <Image src="https://bit.ly/3hO2KCD" alt="Thumbnail" width={100} height={100} className="rounded-t-xl w-full md:h-52 h-40 object-cover object-top" />
           <div className="md:p-5 p-3 rounded-b-xl">
             <h2 className='md:text-xl text-lg font-bold'>9th Science and Technolo...</h2>
             <div className='md:flex hidden justify-between items-center space-x-5 spaec-x- mt-2'>
@@ -91,7 +102,7 @@ const Ebok_card = () => {
       </Link>
       <Link href="/Courses/Science">
         <div className='my-3 md:w-64 w-40 mr-5 hover:bg-[#2a2a2a] bg-[#212121] rounded-xl'>
-          <Image src="https://bit.ly/3hO2KCD" alt="Thumbnail" width={100} height={100} className="rounded-t-xl w-full md:h-64 h-40 object-cover object-top" />
+          <Image src="https://bit.ly/3hO2KCD" alt="Thumbnail" width={100} height={100} className="rounded-t-xl w-full md:h-52 h-40 object-cover object-top" />
           <div className="md:p-5 p-3 rounded-b-xl">
             <h2 className='md:text-xl text-lg font-bold'>9th Science and Technolo...</h2>
             <div className='md:flex hidden justify-between items-center space-x-5 spaec-x- mt-2'>
@@ -108,7 +119,7 @@ const Ebok_card = () => {
       </Link>
       <Link href="/Courses/Science">
         <div className='my-3 md:w-64 w-40 mr-5 hover:bg-[#2a2a2a] bg-[#212121] rounded-xl'>
-          <Image src="https://bit.ly/3hO2KCD" alt="Thumbnail" width={100} height={100} className="rounded-t-xl w-full md:h-64 h-40 object-cover object-top" />
+          <Image src="https://bit.ly/3hO2KCD" alt="Thumbnail" width={100} height={100} className="rounded-t-xl w-full md:h-52 h-40 object-cover object-top" />
           <div className="md:p-5 p-3 rounded-b-xl">
             <h2 className='md:text-xl text-lg font-bold'>9th Science and Technolo...</h2>
             <div className='md:flex hidden justify-between items-center space-x-5 spaec-x- mt-2'>
@@ -125,7 +136,7 @@ const Ebok_card = () => {
       </Link>
       <Link href="/Courses/Science">
         <div className='my-3 md:w-64 w-40 mr-5 hover:bg-[#2a2a2a] bg-[#212121] rounded-xl'>
-          <Image src="https://bit.ly/3hO2KCD" alt="Thumbnail" width={100} height={100} className="rounded-t-xl w-full md:h-64 h-40 object-cover object-top" />
+          <Image src="https://bit.ly/3hO2KCD" alt="Thumbnail" width={100} height={100} className="rounded-t-xl w-full md:h-52 h-40 object-cover object-top" />
           <div className="md:p-5 p-3 rounded-b-xl">
             <h2 className='md:text-xl text-lg font-bold'>9th Science and Technolo...</h2>
             <div className='md:flex hidden justify-between items-center space-x-5 spaec-x- mt-2'>
