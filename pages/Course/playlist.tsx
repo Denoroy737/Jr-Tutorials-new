@@ -18,7 +18,7 @@ const Playlist: React.FC<Props> = ({ course }) => {
           const { _key, title, mainImage, slug, _id } = video;
           return (
             <Link href={`/Course/${encodeURIComponent(course.slug.current)}/${encodeURIComponent(slug.current)}`} key={_id}>
-              <div className='overflow-auto md:h-2/4' key={_id}>
+              <div className='overflow-auto' key={_id}>
                 <div className='md:p-3 p-1 hover:bg-[#161616] rounded-xl'>
                   <div className='flex space-x-3'>
                     {mainImage && (

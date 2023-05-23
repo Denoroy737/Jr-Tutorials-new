@@ -104,7 +104,7 @@ export default function Signup() {
 
   return (
     <div className="text-white">
-      <Button auto color="warning" shadow onPress={handler}>
+      <Button auto color="warning" shadow  onPress={handler}>
         Join now
       </Button>
       <Modal

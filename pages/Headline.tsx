@@ -11,7 +11,7 @@ const Headline = (props: { Title: string }) => {
                     <h1 className='md:text-2xl text-xl font-bold my-5 hover:text-[#e4e4e4]'>{props.Title}</h1>
                 </Link>
             </div>
-            <div className="flex items-center space-x-3">
+            <div className="flex flex-col items-center space-x-3">
                 <div className='flex flex-row space-x-2 justify-center py-1 px-2 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300 rounded-full'>
                     <div className="md:p-2 p-1.5 bg-pink-200 rounded-full">
                         <Category set="broken" primaryColor="black" />
