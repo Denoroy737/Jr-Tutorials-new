@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className="hidden md:block">
         <Sidebar />
       </div>
-      <div className="px-10 py-5 w-[100vw] h-screen overflow-y-auto overflow-x-hidden">
+      <div className="md:px-10 px-5 py-5 w-[100vw] h-screen overflow-y-auto overflow-x-hidden">
         <Nav />
         <div className="my-5">
           <Component {...pageProps} />
