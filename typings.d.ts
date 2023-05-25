@@ -20,9 +20,12 @@ export interface Course extends SanityDocument {
     price: number;
     description: string;
     videos: {
+        length: number;
         _key: string;
         _type: "video";
         description: string;
+        chapter: number;
+        lecture: number;
         mainImage: {
             _type: "image";
             asset: {

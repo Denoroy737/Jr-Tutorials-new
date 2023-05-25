@@ -86,8 +86,6 @@ export default function Login() {
           </Text>
         </Modal.Header>
         <Modal.Body>
-          <form action="">
-
             <Input
               clearable
               bordered
@@ -129,7 +127,6 @@ export default function Login() {
                 <Text color="lightgray" size={14}>Forget Password?</Text>
               </Link>
             </Row>
-          </form>
         </Modal.Body>
         <Modal.Footer>
           <Button auto flat color="error" onPress={closeHandler}>
