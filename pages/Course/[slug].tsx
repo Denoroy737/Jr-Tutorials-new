@@ -11,7 +11,7 @@ interface Props {
 }
 
 const PostPage = ({ course }: Props) => {
-  console.log("course", course);
+  console.log("course");
   const router = useRouter();
 
   if (router.isFallback) {
@@ -26,7 +26,7 @@ const PostPage = ({ course }: Props) => {
           <Player
             playsInline
             poster={urlFor(course.mainImage).width(900).url()}
-            src={course.videos[0].video.secure_url} // Accessing the secure_url property of the video object
+            src={`course.videos[0].video.secure_url`} // Accessing the secure_url property of the video object
           />
 
           <div className='my-3'>

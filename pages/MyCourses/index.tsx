@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from "next/link"
-import Card from '../Card'
+import Card from '../../components/Card'
 const page = () => {
   return (
     <div className='md:my-5 flex flex-col'>

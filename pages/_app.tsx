@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { User, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../config/firebase";
 import "../styles/globals.css";
-import Nav from "./Navbar";
-import Sidebar from "./Sidebar";
+import Nav from "../components/Navbar";
+import Sidebar from "../components/Sidebar";
 import type { AppProps } from "next/app";
 import { Loading } from "@nextui-org/react";
 
