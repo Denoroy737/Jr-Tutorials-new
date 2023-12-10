@@ -4,7 +4,6 @@ import react, { useEffect, useState } from "react";
 import Login from "../pages/login";
 import Signup from "../pages/signup";
 import { auth } from '../config/firebase';
-yarn
 const Navbar = () => {
   const [clientRendered, setClientRendered] = useState(false);
 
